@@ -1,36 +1,39 @@
 package com.fitness.activityservice.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
-@Document("activities")
-@Builder
+@Document(collection = "activities")
 @Data
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Activity {
 
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private  String id;
-    private  String userId;
-    private  ActivityType type;
-    private  Integer duration;
-    private  Integer caloriesBurned;
+    @Id
+    private String id;
+
+    private String userId;
+
+    private ActivityType type;
+
+    private Integer duration;
+
+    private Integer caloriesBurned;
+
     @CreatedDate
     private LocalDateTime startTime;
 
     @Field("metrics")
-    private Map<String,Object> attributes;
+    private Map<String, Object> attributes;
 
-
+    @LastModifiedDate
     private LocalDateTime updateTime;
-
-
 }
